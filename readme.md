@@ -36,6 +36,11 @@ Long answer: as you need Python3.x, you need software collections and they are n
 ## Todo
 * Add a call to the HA websocket when needed, saves some time
 * Libcec and other optionals with parameters instead of always
+* fixing a service for bluetooth support: currently need to run:
+```
+/usr/bin/hciattach /dev/ttyS0 bcm43xx 921600 noflow -
+```
+* document steps to get a razberry and bt together working on pi3 ( https://wiki.fhem.de/wiki/Raspberry_Pi_3:_GPIO-Port_Module_und_Bluetooth )
 
 
 ## Pull requests
