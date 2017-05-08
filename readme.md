@@ -2,7 +2,10 @@
 
 * First of all: work in progress
 * Second, you config should be in roles/homeassistant/templates
-* third, if you need to use {{ foo }} in your templates, you need to use {{ '{{' }} foo {{ '}}' }}
+* third, if you need to use {{ foo }} in your templates, you need to use:
+```
+{{ '{{' }} foo {{ '}}' }}
+```
 
 in a seperate repo you will need to create your config.
 To make the hassbian part work add the following file in /etc/ansible/facts.d/hassbian
@@ -33,3 +36,7 @@ Long answer: as you need Python3.x, you need software collections and they are n
 ## Todo
 * Add a call to the HA websocket when needed, saves some time
 * Libcec and other optionals with parameters instead of always
+
+
+## Pull requests
+YES!
