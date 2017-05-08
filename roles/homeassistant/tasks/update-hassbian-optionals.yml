@@ -1,0 +1,18 @@
+- name: stop home-assistant
+  systemd: name=home-assistant@homeassistant.service state=stopped
+
+- name: install/update hassbian-optionals ( can take a while )
+  shell: hassbian-config install {{ item }}
+  with_items:
+    - openzwave
+    - libcec
+
+- name: update homeassistant
+  shell: source /srv/homeassistant/bin/activate && pip3 install --upgrade pyatv
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: homeassistant
+
+- name: start home-assistant
+  systemd: name=home-assistant@homeassistant.service state=started daemon_reload=yes

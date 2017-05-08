@@ -1,0 +1,5 @@
+- name: include centos7
+  include: install-centos7.yml
+  when:  
+  - ansible_os_family == "RedHat"
+  - ansible_distribution_major_version  == "7"

@@ -1,0 +1,12 @@
+- name: stop home-assistant
+  systemd: name=home-assistant@homeassistant.service state=stopped
+
+- name: update homeassistant
+  shell: source /srv/homeassistant/bin/activate && pip3 install --upgrade homeassistant
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: homeassistant
+
+- name: start home-assistant
+  systemd: name=home-assistant@homeassistant.service state=started daemon_reload=yes

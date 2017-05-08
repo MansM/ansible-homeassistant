@@ -1,0 +1,7 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: including update
+      include_role:
+        name: homeassistant
+        tasks_from: update

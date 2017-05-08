@@ -1,0 +1,35 @@
+- name: install sudo
+  yum: name=sudo state=present
+
+- name: install software collections
+  yum: name=centos-release-scl state=present
+
+- name: install python3.5
+  yum: name=rh-python35 state=present
+
+- name: creating group
+  group: name=homeassistant system=yes state=present
+
+- name: create user
+  user: name=homeassistant group=homeassistant groups=dialout createhome=yes state=present
+
+- name: create /src/homeassistant
+  file: path=/srv/homeassistant owner=homeassistant group=homeassistant state=directory
+
+- name: create virtualenv
+  shell: echo virtualenv -p python3 /srv/homeassistant| scl enable rh-python35 -
+  become: yes
+  become_user: homeassistant
+
+- name: install homeassistant
+  shell: echo "source /srv/homeassistant/bin/activate && pip3 install --upgrade homeassistant" | scl enable rh-python35 -
+  args:
+    executable: /bin/bash
+  become: yes
+  become_user: homeassistant
+
+- name: systemd template
+  template: dest=/etc/systemd/system/homeassistant.service src=homeassistant.systemd
+
+- name: systemd enable and start
+  systemd: name=homeassistant state=started enabled=yes daemon_reload=yes

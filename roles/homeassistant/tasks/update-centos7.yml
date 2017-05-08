@@ -1,0 +1,7 @@
+- name: install homeassistant
+  shell: echo "source /srv/homeassistant/bin/activate && pip3 install --upgrade homeassistant" | scl enable rh-python35 -
+  become: yes
+  become_user: homeassistant
+
+- name: systemd enable and start
+  systemd: name=homeassistant state=restarted enabled=yes daemon_reload=yes

@@ -1,0 +1,25 @@
+# reload core
+- name: update config_files
+  template: dest=/home/homeassistant/.homeassistant/{{ item }} src={{ item }}
+  with_items:
+    - automation.yml
+    - configuration.yaml
+    - customize.yml
+    - input_boolean.yml
+    - input_select.yml
+    - script.yml
+    - zwave.yml
+
+
+
+# reload groups
+- name: update groups.yml
+  template: dest=/home/homeassistant/.homeassistant/groups.yaml src=groups.yml
+  register: groups_yml
+
+
+- name: restart homeassistant
+  systemd: name=home-assistant@homeassistant.service state=restarted daemon_reload=yes
+
+# - debug:
+#     msg: "{{ configuration_yml }}"
