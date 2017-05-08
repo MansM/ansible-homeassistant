@@ -1,3 +1,4 @@
 roles/homeassistant/templates/*
 *.retry
 inventory
+!roles/homeassistant/templates/.gitkeep
