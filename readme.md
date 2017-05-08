@@ -9,11 +9,11 @@
 
 in a seperate repo you will need to create your config.
 To make the hassbian part work add the following file in /etc/ansible/facts.d/hassbian
-'''
+```
 {
   "hassbian": true
 }
-'''
+```
 
 ## Inventory file
 For ansible you need an inventory file I use something simmilar to this:
