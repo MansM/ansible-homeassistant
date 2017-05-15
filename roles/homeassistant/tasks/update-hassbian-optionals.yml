@@ -10,7 +10,7 @@
 - name: install libmysql client, needed for mysql backend
   apt: name=libmysqlclient-dev  update_cache=yes state=present
   
-- name: update homeassistant
+- name: update additional libraries through pip
   shell: source /srv/homeassistant/bin/activate && pip3 install --upgrade {{ item }}
   args:
     executable: /bin/bash
