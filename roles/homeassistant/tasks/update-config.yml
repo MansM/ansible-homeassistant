@@ -1,16 +1,18 @@
 # reload core
 - name: update config_files
-  template: dest=/home/homeassistant/.homeassistant/{{ item }} src={{ item }}
+  template: dest=/home/homeassistant/.homeassistant/{{ item }} src={{ item }} owner=homeassistant group=homeassistant
   with_items:
-    - automation.yml
     - configuration.yaml
     - customize.yml
     - input_boolean.yml
     - input_select.yml
     - script.yml
+    - secrets.yaml
     - zwave.yml
 
-
+#copy config folder
+- name: copy config folder
+  copy: src=config/ dest=/home/homeassistant/.homeassistant/ force=yes owner=homeassistant group=homeassistant
 
 # reload groups
 - name: update groups.yml
