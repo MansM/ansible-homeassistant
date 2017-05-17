@@ -4,3 +4,4 @@ roles/homeassistant/files/*
 inventory
 !roles/homeassistant/templates/.gitkeep
 !roles/homeassistant/files/.gitkeep
+*/secrets.yaml
