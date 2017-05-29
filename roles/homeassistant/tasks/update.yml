@@ -7,9 +7,9 @@
 - name: include hassbian
   include: update-hassbian.yml
   when:  
-  - ansible_local.hassbian.hassbian == true
+  - ansible_hostname == "hassbian"
 
 - name: include hassbian-optionals
   include: update-hassbian-optionals.yml
   when:  
-  - ansible_local.hassbian.hassbian == true
+  - ansible_hostname == "hassbian"

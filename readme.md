@@ -24,7 +24,7 @@ pi ansible_host=hostip ansible_user=pi  ansible_ssh_common_args="-o StrictHostKe
 ## How to run it
 This is what I use
 ```
-ansible-playbook -i inventory --limit pi  config.yml
+ansible-playbook -i inventory --limit pi  config.yml -k
 ```
 
 ## Centos on Raspberry PI

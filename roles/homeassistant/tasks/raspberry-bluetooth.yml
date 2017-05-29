@@ -1,0 +1,29 @@
+- name: fix bluetooth overlay stuff for raspberry
+  lineinfile: 
+    path: /boot/config.txt
+    regexp: '^dtoverlay='
+    line: 'dtoverlay=pi3-miniuart-bt'
+
+- name: fix core freq for bluetooth on raspberry
+  lineinfile: 
+    path: /boot/config.txt
+    regexp: '^core_freq='
+    line: 'core_freq=250'
+
+- name: fix console
+  lineinfile:
+    path: /boot/cmdline.txt
+    regexp: '^(.*)console=serial0,115200 console=tty1(.*)'
+    line: '\1 console=tty1 \2'
+    backrefs: yes
+
+- name: add the following packages to get bluetooth working
+  apt: name={{ item }} state=present
+  with_items:
+    - bluetooth 
+    - libbluetooth-dev
+    - pkg-config 
+    - libboost-python-dev 
+    - libboost-thread-dev 
+    - libglib2.0-dev 
+    - python-dev

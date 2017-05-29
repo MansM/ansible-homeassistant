@@ -3,7 +3,12 @@
   vars_files:
     - ./vars.yml
   tasks:
+    # - name: including role
+    #   include_role:
+    #     name: homeassistant
+    #     tasks_from: install
+
     - name: including role
       include_role:
         name: homeassistant
-        tasks_from: install
+        tasks_from: raspberry-bluetooth
