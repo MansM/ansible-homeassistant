@@ -10,7 +10,7 @@ RUN (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == \
     rm -f /lib/systemd/system/basic.target.wants/*;\
     rm -f /lib/systemd/system/anaconda.target.wants/*;
 
-RUN yum install -y epel-release && yum install -y ansible && yum clean all
+RUN yum install -y epel-release && yum install -y ansible sudo && yum clean all
 
 VOLUME [ "/sys/fs/cgroup" ]
 CMD ["/usr/sbin/init"]

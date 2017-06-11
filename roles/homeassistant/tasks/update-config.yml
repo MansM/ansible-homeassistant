@@ -4,8 +4,6 @@
   with_items:
     - configuration.yaml
     - customize.yml
-    - input_boolean.yml
-    - input_select.yml
     - script.yml
     - secrets.yaml
     - zwave.yml
@@ -14,14 +12,16 @@
 - name: copy config folder
   copy: src=config/ dest=/home/homeassistant/.homeassistant/ force=yes owner=homeassistant group=homeassistant
 
-# reload groups
-- name: update groups.yml
-  template: dest=/home/homeassistant/.homeassistant/groups.yaml src=groups.yml
-  register: groups_yml
+- name: restart homeassistant (EL7)
+  systemd: name=homeassistant.service state=restarted daemon_reload=yes
+  when:  
+    - ansible_os_family  == "RedHat"
+    - ansible_distribution_major_version  == "7"
 
-
-- name: restart homeassistant
+- name: restart homeassistant (Hassbian)
   systemd: name=home-assistant@homeassistant.service state=restarted daemon_reload=yes
+  when:  
+    - ansible_hostname == "hassbian"
 
 # - debug:
 #     msg: "{{ configuration_yml }}"
