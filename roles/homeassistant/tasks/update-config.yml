@@ -1,16 +1,20 @@
 # reload core
-- name: update config_files
-  template: dest=/home/homeassistant/.homeassistant/{{ item }} src={{ item }} owner=homeassistant group=homeassistant
-  with_items:
-    - configuration.yaml
-    - customize.yml
-    - script.yml
-    - secrets.yaml
-    - zwave.yml
+# - name: update config_files
+#   template: dest=/home/homeassistant/.homeassistant/{{ item }} src={{ item }} owner=homeassistant group=homeassistant
+#   with_items:
+#     - secrets.yaml
 
 #copy config folder
-- name: copy config folder
-  copy: src=config/ dest=/home/homeassistant/.homeassistant/ force=yes owner=homeassistant group=homeassistant
+# - name: copy config folder
+#   copy: src=config/ dest=/home/homeassistant/.homeassistant/ force=yes owner=homeassistant group=homeassistant
+
+- name: copy using sync
+  synchronize: 
+    src: config/ 
+    dest: /home/homeassistant/.homeassistant/ 
+    recursive: yes
+    rsync_opts:
+      - "--chown=homeassistant:homeassistant"
 
 - name: restart homeassistant (EL7)
   systemd: name=homeassistant.service state=restarted daemon_reload=yes
