@@ -1,11 +1,8 @@
 ## ansible-homeassistant
 
 * First of all: work in progress
-* Second, you config should be in roles/homeassistant/templates
-* third, if you need to use {{ foo }} in your templates, you need to use:
-```
-{{ '{{' }} foo {{ '}}' }}
-```
+* Second, you config should be in roles/homeassistant/files/config
+
 
 in a seperate repo you will need to create your config.
 To make the hassbian part work add the following file in /etc/ansible/facts.d/hassbian
@@ -36,9 +33,6 @@ Long answer: as you need Python3.x, you need software collections and they are n
 ## Todo
 * Add a call to the HA websocket when needed, saves some time
 * Libcec and other optionals with parameters instead of always
-* create daily restart of bluetooth service at it fucks up
-* Mail arriving at mailgun should trigger a push notification for high priority emails
-  https://github.com/happyleavesaoc/my-home-automation/blob/master/homeassistant/packages/regional_notifications.yaml
 
 
 ## Pull requests
